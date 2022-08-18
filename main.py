@@ -1,18 +1,12 @@
-
 import smtplib
 import speed_recognition as sr
 import pyttsx3
 from email.message import EmailMessage
-
 listener = sr.Recognizer()
 engine = pyttsx3.init()
-
-
 def talk(text):
     engine.say(text)
     engine.runAndWait()
-
-
 def get_info():
     try:
         with sr.Microphone() as source:
@@ -23,8 +17,6 @@ def get_info():
             return info.lower()
     except:
         pass
-
-
 def send_email(receiver, subject, message):
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
@@ -36,8 +28,6 @@ def send_email(receiver, subject, message):
     email['Subject'] = subject
     email.set_content(message)
     server.send_message(email)
-
-
 email_list = {
     'dude': 'COOL_DUDE_EMAIL',
     'bts': 'diamond@bts.com',
@@ -45,8 +35,6 @@ email_list = {
     'lisa': 'lisa@blackpink.com',
     'irene': 'irene@redvelvet.com'
 }
-
-
 def get_email_info():
     talk('To Whom you want to send email')
     name = get_info()
@@ -62,6 +50,4 @@ def get_email_info():
     send_more = get_info()
     if 'yes' in send_more:
         get_email_info()
-
-
 get_email_info()
